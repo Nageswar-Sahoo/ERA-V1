@@ -255,11 +255,16 @@ def train_model(config):
         }, model_filename)
 
 def collete_fn(batch):
-    encoder_input_max= max(x["encoder_string_length"] for x in batch)
-    decoder_input_max= max(x["decoder_string_length"] for x in batch)
+    encoder_input_max = max(x["encoder_string_length"] for x in batch)
+    decoder_input_max = max(x["decoder_string_length"] for x in batch)
 
     print("encoder_input_max", encoder_input_max)
     print("decoder_input_max", decoder_input_max)
+
+    max_len=decoder_input_max
+    if encoder_input_max> decoder_input_max :
+        max_len=encoder_input_max
+
 
 
     encoder_inputs=[]
@@ -271,11 +276,11 @@ def collete_fn(batch):
     tgt_text=[]
 
     for x in batch:
-        encoder_inputs.append(x["encoder_input"][:encoder_input_max])
-        decoder_inputs.append(x["decoder_input"][:decoder_input_max])
-        encoder_mask.append((x["encoder_mask"][0,0,:encoder_input_max]).unsqueeze(0).unsqueeze(0))
-        decoder_mask.append((x["decoder_mask"][0,:decoder_input_max,:decoder_input_max]).unsqueeze(0))
-        label.append(x["label"][:decoder_input_max])
+        encoder_inputs.append(x["encoder_input"][:max_len])
+        decoder_inputs.append(x["decoder_input"][:max_len])
+        encoder_mask.append((x["encoder_mask"][0,0,:max_len]).unsqueeze(0).unsqueeze(0))
+        decoder_mask.append((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0))
+        label.append(x["label"][:max_len])
         src_text.append(x["src_text"])
         tgt_text.append(x["tgt_text"])
 
@@ -288,10 +293,10 @@ def collete_fn(batch):
 
         print("reshape one ")
 
-        print(x["encoder_input"][:encoder_input_max].shape)
-        print(x["decoder_input"][:decoder_input_max].shape)
-        print((x["encoder_mask"][0,0,:encoder_input_max]).unsqueeze(0).unsqueeze(0).shape)
-        print((x["decoder_mask"][0,:decoder_input_max,:decoder_input_max]).unsqueeze(0).shape)
+        print(x["encoder_input"][:max_len].shape)
+        print(x["decoder_input"][:max_len].shape)
+        print((x["encoder_mask"][0,0,:max_len]).unsqueeze(0).unsqueeze(0).shape)
+        print((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0).shape)
 
         print("***************************************")
 
