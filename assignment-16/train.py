@@ -279,7 +279,7 @@ def collete_fn(batch):
         encoder_inputs.append(x["encoder_input"][:max_len])
         decoder_inputs.append(x["decoder_input"][:max_len])
         encoder_mask.append((x["encoder_mask"][0,0,:max_len]).unsqueeze(0).unsqueeze(0).unsqueeze(0))
-        decoder_mask.append((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0))
+        decoder_mask.append((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0).unsqueeze(0))
         label.append(x["label"][:max_len])
         src_text.append(x["src_text"])
         tgt_text.append(x["tgt_text"])
@@ -296,7 +296,7 @@ def collete_fn(batch):
         print(x["encoder_input"][:max_len].shape)
         print(x["decoder_input"][:max_len].shape)
         print((x["encoder_mask"][0,0,:max_len]).unsqueeze(0).unsqueeze(0).unsqueeze(0).shape)
-        print((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0).shape)
+        print((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0).unsqueeze(0).shape)
 
         print("***************************************")
 
