@@ -275,6 +275,20 @@ def collete_fn(batch):
         src_text.append(x["src_text"])
         tgt_text.append(x["tgt_text"])
 
+        print(x["encoder_input"].shape)
+        print(x["decoder_input"].shape)
+        print(x["encoder_mask"].shape)
+        print(x["decoder_mask"].shape)
+
+        print("**********************")
+
+        print(encoder_inputs[0].shape)
+        print(decoder_inputs[0].shape)
+        print(encoder_mask[0].shape)
+        print(decoder_mask[0].shape)
+
+    
+
 
     return {
             "encoder_input": torch.vstack(encoder_inputs),  # (seq_len)
