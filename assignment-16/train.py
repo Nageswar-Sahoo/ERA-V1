@@ -258,9 +258,6 @@ def collete_fn(batch):
     encoder_input_max = max(x["encoder_string_length"] for x in batch)
     decoder_input_max = max(x["decoder_string_length"] for x in batch)
 
-    print("encoder_input_max", encoder_input_max)
-    print("decoder_input_max", decoder_input_max)
-
     encoder_inputs=[]
     decoder_inputs=[]
     encoder_mask=[]
