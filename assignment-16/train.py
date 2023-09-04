@@ -269,25 +269,30 @@ def collete_fn(batch):
     for x in batch:
         encoder_inputs.append(x["encoder_input"][:encoder_input_max])
         decoder_inputs.append(x["decoder_input"][:decoder_input_max])
-        encoder_mask.append((x["encoder_mask"][0,0,:encoder_input_max]).unsqueeze(0).unsqueeze(0).unsqueeze(0))
+        encoder_mask.append((x["encoder_mask"][0,0,:encoder_input_max]).unsqueeze(0).unsqueeze(0))
         decoder_mask.append((x["decoder_mask"][0,:decoder_input_max,:decoder_input_max]).unsqueeze(0))
         label.append(x["label"][:decoder_input_max])
         src_text.append(x["src_text"])
         tgt_text.append(x["tgt_text"])
+
+        print("***************************************")
 
         print(x["encoder_input"].shape)
         print(x["decoder_input"].shape)
         print(x["encoder_mask"].shape)
         print(x["decoder_mask"].shape)
 
-        print("**********************")
+        print("reshape one ")
 
         print(encoder_inputs[0].shape)
         print(decoder_inputs[0].shape)
         print(encoder_mask[0].shape)
         print(decoder_mask[0].shape)
 
-    
+        print("***************************************")
+
+
+
 
 
     return {
