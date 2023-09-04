@@ -261,12 +261,6 @@ def collete_fn(batch):
     print("encoder_input_max", encoder_input_max)
     print("decoder_input_max", decoder_input_max)
 
-    max_len=decoder_input_max
-    if encoder_input_max> decoder_input_max :
-        max_len=encoder_input_max
-
-
-
     encoder_inputs=[]
     decoder_inputs=[]
     encoder_mask=[]
@@ -276,29 +270,13 @@ def collete_fn(batch):
     tgt_text=[]
 
     for x in batch:
-        encoder_inputs.append(x["encoder_input"][:max_len])
-        decoder_inputs.append(x["decoder_input"][:max_len])
-        encoder_mask.append((x["encoder_mask"][0,0,:max_len]).unsqueeze(0).unsqueeze(0).unsqueeze(0))
-        decoder_mask.append((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0).unsqueeze(0))
-        label.append(x["label"][:max_len])
+        encoder_inputs.append(x["encoder_input"][:encoder_input_max])
+        decoder_inputs.append(x["decoder_input"][:decoder_input_max])
+        encoder_mask.append((x["encoder_mask"][0,0,:encoder_input_max]).unsqueeze(0).unsqueeze(0).unsqueeze(0))
+        decoder_mask.append((x["decoder_mask"][0,:decoder_input_max,:decoder_input_max]).unsqueeze(0).unsqueeze(0))
+        label.append(x["label"][:decoder_input_max])
         src_text.append(x["src_text"])
         tgt_text.append(x["tgt_text"])
-
-        print("***************************************")
-
-        print(x["encoder_input"].shape)
-        print(x["decoder_input"].shape)
-        print(x["encoder_mask"].shape)
-        print(x["decoder_mask"].shape)
-
-        print("reshape one ")
-
-        print(x["encoder_input"][:max_len].shape)
-        print(x["decoder_input"][:max_len].shape)
-        print((x["encoder_mask"][0,0,:max_len]).unsqueeze(0).unsqueeze(0).unsqueeze(0).shape)
-        print((x["decoder_mask"][0,:max_len,:max_len]).unsqueeze(0).unsqueeze(0).shape)
-
-        print("***************************************")
 
     return {
             "encoder_input": torch.vstack(encoder_inputs),  # (seq_len)
@@ -309,13 +287,6 @@ def collete_fn(batch):
             "src_text": src_text,
             "tgt_text": tgt_text,
         }
-
-
-
-
-
-
-
 
 if __name__ == '__main__':
     warnings.filterwarnings("ignore")
