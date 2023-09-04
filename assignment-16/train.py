@@ -258,6 +258,10 @@ def collete_fn(batch):
     encoder_input_max= max(x["encoder_string_length"] for x in batch)
     decoder_input_max= max(x["decoder_string_length"] for x in batch)
 
+    print("encoder_input_max", encoder_input_max)
+    print("decoder_input_max", decoder_input_max)
+
+
     encoder_inputs=[]
     decoder_inputs=[]
     encoder_mask=[]
@@ -284,10 +288,10 @@ def collete_fn(batch):
 
         print("reshape one ")
 
-        print(encoder_inputs[0].shape)
-        print(decoder_inputs[0].shape)
-        print(encoder_mask[0].shape)
-        print(decoder_mask[0].shape)
+        print(x["encoder_input"][:encoder_input_max].shape)
+        print(x["decoder_input"][:decoder_input_max].shape)
+        print(x["encoder_mask"][0,0,:encoder_input_max].shape)
+        print(x["decoder_mask"][0,:decoder_input_max,:decoder_input_max].shape)
 
         print("***************************************")
 
