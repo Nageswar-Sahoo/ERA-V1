@@ -192,9 +192,28 @@ def train_model(config):
 
     optimizer = torch.optim.Adam(model.parameters(), lr=config['lr'], eps=1e-9)
 
+    MAX_LR=1/1000
+    STEPS_PER_EPOCH=len(train_dataloader)
+    EPOCHS=config['num_epochs']
+
+
+
+    scheduler = torch.optim.lr_scheduler.OneCycleLR(
+        optimizer,
+        max_lr=MAX_LR,
+        steps_per_epoch=STEPS_PER_EPOCH,
+        epochs=EPOCHS,
+        pct_start=int(0.3*EPOCHS)/EPOCHS if EPOCHS !=1 else 0.5,
+        div_factor=100,
+        three_phase=False,
+        final_div_factor=100,
+        anneal_strategy="linear"
+    )
+
     # If the user specified a model to preload before training, load it
     initial_epoch = 0
     global_step = 0
+    prev_lr=[0.0]
     if config['preload']:
         model_filename = get_weights_file_path(config, config['preload'])
         print(f'Preloading model {model_filename}')
@@ -205,12 +224,14 @@ def train_model(config):
         global_step = state['global_step']
 
     loss_fn = nn.CrossEntropyLoss(ignore_index=tokenizer_src.token_to_id('[PAD]'), label_smoothing=0.1).to(device)
-
+    scalar=torch.cuda.amp.GradScaler()
     for epoch in range(initial_epoch, config['num_epochs']):
         torch.cuda.empty_cache()
         model.train()
         batch_iterator = tqdm(train_dataloader, desc=f"Processing Epoch {epoch:02d}")
         for batch in batch_iterator:
+
+            optimizer.zero_grad(set_to_none=True)
 
             encoder_input = batch['encoder_input'].to(device) # (b, seq_len)
             decoder_input = batch['decoder_input'].to(device) # (B, seq_len)
@@ -218,27 +239,33 @@ def train_model(config):
             decoder_mask = batch['decoder_mask'].to(device) # (B, 1, seq_len, seq_len)
 
             # Run the tensors through the encoder, decoder and the projection layer
-            encoder_output = model.encode(encoder_input, encoder_mask) # (B, seq_len, d_model)
-            decoder_output = model.decode(encoder_output, encoder_mask, decoder_input, decoder_mask) # (B, seq_len, d_model)
-            proj_output = model.project(decoder_output) # (B, seq_len, vocab_size)
+            with torch.autocast(device_type=device.type,dtype=torch.float16):
 
-            # Compare the output with the label
-            label = batch['label'].to(device) # (B, seq_len)
+                encoder_output = model.encode(encoder_input, encoder_mask) # (B, seq_len, d_model)
+                decoder_output = model.decode(encoder_output, encoder_mask, decoder_input, decoder_mask) # (B, seq_len, d_model)
+                proj_output = model.project(decoder_output) # (B, seq_len, vocab_size)
+
+                 # Compare the output with the label
+                label = batch['label'].to(device) # (B, seq_len)
 
             # Compute the loss using a simple cross entropy
-            loss = loss_fn(proj_output.view(-1, tokenizer_tgt.get_vocab_size()), label.view(-1))
-            batch_iterator.set_postfix({"loss": f"{loss.item():6.3f}"})
+                loss = loss_fn(proj_output.view(-1, tokenizer_tgt.get_vocab_size()), label.view(-1))
+            batch_iterator.set_postfix({"loss": f"{loss.item():6.3f}", "  lr":f"{prev_lr[-1]}"})
 
             # Log the loss
             writer.add_scalar('train loss', loss.item(), global_step)
             writer.flush()
 
             # Backpropagate the loss
-            loss.backward()
-
+            scalar.scale(loss).backward()
+            scale=scalar.get_scale()
+            scalar.step(optimizer)
+            scalar.update()
+            skip_lr_sched=(scale > scalar .get_scale())
+            if not skip_lr_sched:
+                scheduler.step()
             # Update the weights
-            optimizer.step()
-            optimizer.zero_grad(set_to_none=True)
+            prev_lr.append(scheduler.get_last_lr())
 
             global_step += 1
 
