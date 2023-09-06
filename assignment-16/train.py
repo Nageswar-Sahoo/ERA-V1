@@ -216,7 +216,7 @@ def train_model(config):
         max_lr=MAX_LR,
         steps_per_epoch=STEPS_PER_EPOCH,
         epochs=EPOCHS,
-        pct_start=int(0.3*EPOCHS)/EPOCHS if EPOCHS !=1 else 0.5,
+        pct_start=1/10 if EPOCHS !=1 else 0.5,
         div_factor=100,
         three_phase=False,
         final_div_factor=100,
