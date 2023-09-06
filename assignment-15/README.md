@@ -4,44 +4,44 @@ Attention is all you need implementation
 
 Training Log : 
 
-Processing Epoch 06: 100%|██████████| 1213/1213 [04:23<00:00,  4.61it/s, loss=4.941,   lr=[0.0005048979591836735]]
---------------------------------------------------------------------------------
+   Processing Epoch 06: 100%|██████████| 1213/1213 [04:23<00:00,  4.61it/s, loss=4.941,   lr=[0.0005048979591836735]]
+   --------------------------------------------------------------------------------
     SOURCE: These ladies belonged to a circle which, though higher, was entirely hostile to the set Anna frequented.
     TARGET: Queste signore appartenevano, è vero, a un ambiente elevato, ma questo era completamente ostile a quello frequentato da Anna.
- PREDICTED: Queste signore , in quel momento c ’ era un ’ altra parte , ma tutti i due interessi .
---------------------------------------------------------------------------------
+    PREDICTED: Queste signore , in quel momento c ’ era un ’ altra parte , ma tutti i due interessi .
+   --------------------------------------------------------------------------------
     SOURCE: "This very day I shall take you in the carriage to Millcote, and you must choose some dresses for yourself.
     TARGET: — Oggi stesso, — riprese, — vi condurrò in carrozza a Millcote per farvi scegliere alcuni abiti.
- PREDICTED: — Ecco , ecco , andate a prendere il baule , e dovete esser le calze .
---------------------------------------------------------------------------------
-Processing Epoch 07: 100%|██████████| 1213/1213 [04:23<00:00,  4.61it/s, loss=4.759,   lr=[0.0007524489795918368]]
---------------------------------------------------------------------------------
-    SOURCE: She had now called Varenka only to give her a silent blessing for the important event which, according to Kitty, was to happen in the woods that day after dinner.
-    TARGET: Adesso, aveva chiamato Varen’ka solo per benedirla mentalmente, in vista di un avvenimento così importante che, secondo Kitty, doveva compiersi in quel giorno, dopo pranzo, nel bosco.
- PREDICTED: Adesso ora aveva già detto a Varen ’ ka , per un certo che , per la sua vita , per Kitty , per Kitty , per quanto al pranzo , per il pranzo , per il pranzo , per il pranzo , per il pranzo , era in cui il pranzo , per il pranzo , per la sua vita , per il pranzo , per la sua felicità , per la sua .
---------------------------------------------------------------------------------
+    PREDICTED: — Ecco , ecco , andate a prendere il baule , e dovete esser le calze .
+   --------------------------------------------------------------------------------
+   Processing Epoch 07: 100%|██████████| 1213/1213 [04:23<00:00,  4.61it/s, loss=4.759,   lr=[0.0007524489795918368]]
+   --------------------------------------------------------------------------------
+    SOURCE: She had now called Varenka only to give her a silent blessing for the important event which, according to Kitty, was to happen in the woods that day after    dinner.
+    TARGET: Adesso, aveva chiamato Varen’ka solo per benedirla mentalmente, in vista di un avvenimento così importante che, secondo Kitty, doveva compiersi in quel       giorno, dopo pranzo, nel bosco.
+    PREDICTED: Adesso ora aveva già detto a Varen ’ ka , per un certo che , per la sua vita , per Kitty , per Kitty , per quanto al pranzo , per il pranzo , per il       pranzo , per il pranzo , per il pranzo , era in cui il pranzo , per il pranzo , per la sua vita , per il pranzo , per la sua felicità , per la sua .
+   --------------------------------------------------------------------------------
     SOURCE: 'No, I have no time. I've only come in for a moment,' replied Oblonsky, throwing open his coat.
     TARGET: — Non ho tempo, son venuto solo per un attimo — rispose Stepan Arkad’ic.
- PREDICTED: — No , non ho ora . — Ho già fatto un attimo — rispose Stepan Arkad ’ ic , sorridendo .
---------------------------------------------------------------------------------
-Processing Epoch 08: 100%|██████████| 1213/1213 [04:22<00:00,  4.61it/s, loss=4.155,   lr=[0.001]]
---------------------------------------------------------------------------------
+     PREDICTED: — No , non ho ora . — Ho già fatto un attimo — rispose Stepan Arkad ’ ic , sorridendo .
+    --------------------------------------------------------------------------------
+    Processing Epoch 08: 100%|██████████| 1213/1213 [04:22<00:00,  4.61it/s, loss=4.155,   lr=[0.001]]
+   --------------------------------------------------------------------------------
     SOURCE: I met him in Tver when I was in the Service there and he came on conscription duty.
     TARGET: L’ho conosciuto a Tver’ quando prestavo servizio là e lui ci veniva per l’arruolamento delle reclute.
- PREDICTED: Lo vedevo in servizio quando ero entrato in servizio e lui era entrato nel servizio del governatorato .
---------------------------------------------------------------------------------
-    SOURCE: Men and women die; philosophers falter in wisdom, and Christians in goodness: if any one you know has suffered and erred, let him look higher than his equals for strength to amend and solace to heal."
+     PREDICTED: Lo vedevo in servizio quando ero entrato in servizio e lui era entrato nel servizio del governatorato .
+   --------------------------------------------------------------------------------
+    SOURCE: Men and women die; philosophers falter in wisdom, and Christians in goodness: if any one you know has suffered and erred, let him look higher than his       equals for strength to amend and solace to heal."
     TARGET: Se qualcuno che voi conoscete, ha sofferto e peccato, che cerchi, non fra i suoi simili, ma più in alto, la forza e il sollievo.
- PREDICTED: Le donne e i tuoi sentimenti , in modo , e se qualcuno non avete , e , , , , più , più di più , più , più di quanto più si .
---------------------------------------------------------------------------------
-Processing Epoch 09: 100%|██████████| 1213/1213 [04:22<00:00,  4.62it/s, loss=3.719,   lr=[0.0009091]]
---------------------------------------------------------------------------------
-    SOURCE: Something has gone wrong; the rudder has come off, or the boat-hook has slipped overboard, or his hat has dropped into the water and is floating rapidly down stream.
-    TARGET: È accaduto qualche guasto; si sarà schiodato il timone, la gaffa sarà scivolata nell’acqua, a lui sarà caduto il cappello che se ne va rapidamente alla deriva.
- PREDICTED: Non è vero che il timone è andato via , o la gaffa ha portato a terra , o il cappello si ha in acqua e si a passo .
---------------------------------------------------------------------------------
-    SOURCE: The cloud moved past, enveloping him and the haycock upon which he sat, and the other haycocks, the carts, the whole of the meadow, and the distant fields. They all seemed to vibrate and heave with the strains of that wild, madly merry song, interspersed with screams and whistling.
-    TARGET: La nuvola avanzò, lo afferrò, e la bica sulla quale era sdraiato e le altre biche e i carri e il bosco intero, il campo lontano, tutto cominciò a camminare e ad agitarsi al ritmo di quella selvaggia, ilare canzone tra gridi, sibili e sobbalzi.
+    PREDICTED: Le donne e i tuoi sentimenti , in modo , e se qualcuno non avete , e , , , , più , più di più , più , più di quanto più si .
+   --------------------------------------------------------------------------------
+   Processing Epoch 09: 100%|██████████| 1213/1213 [04:22<00:00,  4.62it/s, loss=3.719,   lr=[0.0009091]]
+   --------------------------------------------------------------------------------
+    SOURCE: Something has gone wrong; the rudder has come off, or the boat-hook has slipped overboard, or his hat has dropped into the water and is floating rapidly    down stream.
+       TARGET: È accaduto qualche guasto; si sarà schiodato il timone, la gaffa sarà scivolata nell’acqua, a lui sarà caduto il cappello che se ne va rapidamente alla    deriva.
+    PREDICTED: Non è vero che il timone è andato via , o la gaffa ha portato a terra , o il cappello si ha in acqua e si a passo .
+   --------------------------------------------------------------------------------
+       SOURCE: The cloud moved past, enveloping him and the haycock upon which he sat, and the other haycocks, the carts, the whole of the meadow, and the distant       fields. They all seemed to vibrate and heave with the strains of that wild, madly merry song, interspersed with screams and whistling.
+    TARGET: La nuvola avanzò, lo afferrò, e la bica sulla quale era sdraiato e le altre biche e i carri e il bosco intero, il campo lontano, tutto cominciò a          camminare e ad agitarsi al ritmo di quella selvaggia, ilare canzone tra gridi, sibili e sobbalzi.
  PREDICTED: Il vento lo e la pioggia , che sedette , e gli altri , e i campi , i campi , i campi , i campi , i campi , si misero a ridere con la meraviglia che sembravano e la meraviglia .
 --------------------------------------------------------------------------------
 Processing Epoch 10: 100%|██████████| 1213/1213 [04:23<00:00,  4.60it/s, loss=3.746,   lr=[0.0008182749381698269]]
