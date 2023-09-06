@@ -196,20 +196,6 @@ def train_model(config):
     STEPS_PER_EPOCH=len(train_dataloader)
     EPOCHS=config['num_epochs']
 
-
-
-    scheduler = torch.optim.lr_scheduler.OneCycleLR(
-        optimizer,
-        max_lr=MAX_LR,
-        steps_per_epoch=STEPS_PER_EPOCH,
-        epochs=EPOCHS,
-        pct_start=int(0.3*EPOCHS)/EPOCHS if EPOCHS !=1 else 0.5,
-        div_factor=100,
-        three_phase=False,
-        final_div_factor=100,
-        anneal_strategy="linear"
-    )
-
     # If the user specified a model to preload before training, load it
     initial_epoch = 0
     global_step = 0
@@ -225,6 +211,18 @@ def train_model(config):
 
     loss_fn = nn.CrossEntropyLoss(ignore_index=tokenizer_src.token_to_id('[PAD]'), label_smoothing=0.1).to(device)
     scalar=torch.cuda.amp.GradScaler()
+    scheduler = torch.optim.lr_scheduler.OneCycleLR(
+        optimizer,
+        max_lr=MAX_LR,
+        steps_per_epoch=STEPS_PER_EPOCH,
+        epochs=EPOCHS,
+        pct_start=int(0.3*EPOCHS)/EPOCHS if EPOCHS !=1 else 0.5,
+        div_factor=100,
+        three_phase=False,
+        final_div_factor=100,
+        anneal_strategy="linear"
+    )
+
     for epoch in range(initial_epoch, config['num_epochs']):
         torch.cuda.empty_cache()
         model.train()
