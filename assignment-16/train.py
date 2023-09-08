@@ -140,15 +140,14 @@ def get_or_build_tokenizer(config, ds, lang):
 
 def filter_function(item):
     # Define your condition to filter out records
-    src_txt = item['translation'][config['lang_src']].split()
-    tgt_txt = item['translation'][config['lang_tgt']].split()
-    print(item['translation'][config['lang_src']])
+    src_txt = item['translation']['en'].split()
+    tgt_txt = item['translation']['fr'].split()
 
     if len(src_txt) > 150 or len(tgt_txt) > len(src_txt)+10:
         print("removed text english ")
-        print(item['translation'][config['lang_src']])
+        print(item['translation']['en'])
         print("removed text french ")
-        print(item['translation'][config['lang_tgt']])
+        print(item['translation']['fr'])
         return False
     return True
 def get_ds(config):
