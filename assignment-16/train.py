@@ -152,13 +152,13 @@ def filter_function(item):
     return True
 def get_ds(config):
     # It only has the train split, so we divide it overselves
-    ds_raw = load_dataset('opus_books', f"{config['lang_src']}-{config['lang_tgt']}", split='train')
+    ds_raw1 = load_dataset('opus_books', f"{config['lang_src']}-{config['lang_tgt']}", split='train')
 
-    len_before_cleanup= ds_raw.dataset_size
+    len_before_cleanup= ds_raw1.dataset_size
 
 
 
-    ds_raw.filter(filter_function)
+    ds_raw=ds_raw1.filter(filter_function)
 
     print(f'Dataset size before/after cleanup : {ds_raw.dataset_size,len_before_cleanup}')
 
