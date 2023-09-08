@@ -138,9 +138,30 @@ def get_or_build_tokenizer(config, ds, lang):
         tokenizer = Tokenizer.from_file(str(tokenizer_path))
     return tokenizer
 
+def filter_function(item):
+    # Define your condition to filter out records
+    src_txt = item['translation'][config['lang_src']].split()
+    tgt_txt = item['translation'][config['lang_tgt']].split()
+    print(item['translation'][config['lang_src']])
+
+    if len(src_txt) > 150 or len(tgt_txt) > len(src_txt)+10:
+        print("removed text english ")
+        print(item['translation'][config['lang_src']])
+        print("removed text french ")
+        print(item['translation'][config['lang_tgt']])
+        return False
+    return True
 def get_ds(config):
     # It only has the train split, so we divide it overselves
     ds_raw = load_dataset('opus_books', f"{config['lang_src']}-{config['lang_tgt']}", split='train')
+
+    len_before_cleanup= ds_raw.dataset_size
+
+
+
+    ds_raw.filter(filter_function)
+
+    print(f'Dataset size before/after cleanup : {ds_raw.dataset_size,len_before_cleanup}')
 
     # Build tokenizers
     tokenizer_src = get_or_build_tokenizer(config, ds_raw, config['lang_src'])
