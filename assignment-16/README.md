@@ -15,12 +15,6 @@ Processing Epoch 30: 100%|██████████| 3516/3516 [15:07<00:00
     TARGET: L'aspect seul de son corps faisait peur.
  PREDICTED: L ' aspect seul de son corps était terrible .
 --------------------------------------------------------------------------------
-/usr/local/lib/python3.10/dist-packages/torchmetrics/utilities/prints.py:62: FutureWarning: Importing `CharErrorRate` from `torchmetrics` was deprecated and will be removed in 2.0. Import `CharErrorRate` from `torchmetrics.text` instead.
-  _future_warning(
-/usr/local/lib/python3.10/dist-packages/torchmetrics/utilities/prints.py:62: FutureWarning: Importing `WordErrorRate` from `torchmetrics` was deprecated and will be removed in 2.0. Import `WordErrorRate` from `torchmetrics.text` instead.
-  _future_warning(
-/usr/local/lib/python3.10/dist-packages/torchmetrics/utilities/prints.py:62: FutureWarning: Importing `BLEUScore` from `torchmetrics` was deprecated and will be removed in 2.0. Import `BLEUScore` from `torchmetrics.text` instead.
-  _future_warning(
 Processing Epoch 31: 100%|██████████| 3516/3516 [15:04<00:00,  3.89it/s, loss=2.323,   lr=[0.0005048944037545332]]
 --------------------------------------------------------------------------------
     SOURCE: "And what excuse did she give you for entering all alone?"
